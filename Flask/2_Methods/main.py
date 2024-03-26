@@ -34,13 +34,13 @@ def get_index():
 @app.route('/update_index', methods=['POST'])
 def update_index():
 
-    args = request.args
+    args = loads(request.data)
 
-    ix = int(args.get('index'))
+    ix = int(args['index'])
 
-    col = args.get('column')
+    col = args['column']
 
-    new_value = args.get('update')
+    new_value = args['update']
 
     df.at[ix, col] = new_value
     
@@ -51,13 +51,13 @@ def update_index():
 @app.route('/add_row', methods=['PUT'])
 def add_row():
 
-    args = request.args
+    args = loads(request.data)
 
-    id = int(args.get('id'))
+    id = int(args['id'])
 
-    address = args.get('address')
+    address = args['address']
 
-    service_remark = args.get('service_remark')
+    service_remark = args['service_remark']
 
     df.loc[len(df.index)] = [id, address, service_remark]
     
